@@ -1,0 +1,639 @@
+
+> vet-erp@0.1.0 dev
+> concurrently -n API,WEB -c green,cyan "npm run dev --prefix server" "npm run dev --prefix client -- --host 127.0.0.1"
+
+[API] 
+[API] > server@1.0.0 dev
+[API] > nodemon --watch src --exec ts-node src/index.ts
+[API] 
+[WEB] 
+[WEB] > client@0.0.0 dev
+[WEB] > vite --host 127.0.0.1
+[WEB] 
+[WEB] [2m06:10:15[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+[WEB] Port 5173 is in use, trying another one...
+[WEB] Port 5174 is in use, trying another one...
+[WEB] Port 5175 is in use, trying another one...
+[WEB] Port 5176 is in use, trying another one...
+[WEB] 
+[WEB]   [32m[1mVITE[22m v8.0.10[39m  [2mready in [0m[1m490[22m[2m[0m ms[22m
+[WEB] 
+[WEB]   [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5177[22m/[39m
+[WEB] [2m06:10:16[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [optimizer] bundling dependencies...
+[API] [33m[nodemon] 3.1.14[39m
+[API] [33m[nodemon] to restart at any time, enter `rs`[39m
+[API] [33m[nodemon] watching path(s): src\**\*[39m
+[API] [33m[nodemon] watching extensions: ts,json[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ enable debugging { debug: true }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ enable debugging { debug: true }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/models/clinic.models.ts(174,3): error TS2349: This expression is not callable.
+[API]   Type 'Record<string, any>' has no call signatures.
+[API] src/models/clinic.models.ts(174,3): error TS2722: Cannot invoke an object which is possibly 'undefined'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2349, 2722 ]
+[API] }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ suppress logs { quiet: true }
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ enable debugging { debug: true }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(100,5): error TS2741: Property 'movimentacoesEstoque' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(285,5): error TS2741: Property 'movimentacoesEstoque' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(100,5): error TS2741: Property 'movimentacoesEstoque' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(285,5): error TS2741: Property 'movimentacoesEstoque' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(100,5): error TS2741: Property 'movimentacoesEstoque' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(285,5): error TS2741: Property 'movimentacoesEstoque' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ suppress logs { quiet: true }
+[API] MongoDB conectado.
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
+[API] MongoDB conectado.
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ enable debugging { debug: true }
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(109,5): error TS2741: Property 'estoquesProduto' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; movimentacoesEstoque: MovimentacaoEstoque[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(351,5): error TS2741: Property 'estoquesProduto' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; movimentacoesEstoque: MovimentacaoEstoque[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(109,5): error TS2741: Property 'estoquesProduto' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; movimentacoesEstoque: MovimentacaoEstoque[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(351,5): error TS2741: Property 'estoquesProduto' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; movimentacoesEstoque: MovimentacaoEstoque[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(109,5): error TS2741: Property 'estoquesProduto' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; movimentacoesEstoque: MovimentacaoEstoque[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(351,5): error TS2741: Property 'estoquesProduto' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; stockItems: StockItem[]; products: Product[]; movimentacoesEstoque: MovimentacaoEstoque[]; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ suppress logs { quiet: true }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/services/clinic.service.ts(137,49): error TS2339: Property 'getCurrentStockBalance' does not exist on type 'ClinicRepository'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2339 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API] MongoDB conectado.
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[API] MongoDB conectado.
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ override existing { override: true }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ enable debugging { debug: true }
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[WEB] [2m07:12:07[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[WEB] [2m07:12:11[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[WEB] [2m07:12:16[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[WEB] [2m07:12:33[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:12:43[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:13:24[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:13:52[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:14:11[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:14:25[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:14:34[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[WEB] [2m07:15:01[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:16:41[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:19:35[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx[22m
+[WEB] [2m07:19:35[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[WEB] [2m07:20:37[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[WEB] [2m07:20:43[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/dialogs/StockMovementDialog.tsx, /src/components/dialogs/ProductDialog.tsx, /src/pages/StockPage.tsx[22m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+[API] MongoDB conectado.
+[API] Server is running on port 3001
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(116,5): error TS2741: Property 'estoquesLote' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; ... 4 more ...; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(408,5): error TS2741: Property 'estoquesLote' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; ... 4 more ...; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(116,5): error TS2741: Property 'estoquesLote' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; ... 4 more ...; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(408,5): error TS2741: Property 'estoquesLote' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; ... 4 more ...; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] ◇ injected env (3) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/repositories/clinic.repository.ts(121,5): error TS2741: Property 'estoquesLote' is missing in type '{ users: User[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; ... 4 more ...; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] src/repositories/clinic.repository.ts(413,5): error TS2741: Property 'estoquesLote' is missing in type '{ users: PublicUser[]; tutors: Tutor[]; pets: Pet[]; breeds: Breed[]; appointments: Appointment[]; medicalRecords: MedicalRecord[]; financialEntries: FinancialEntry[]; ... 4 more ...; summary: { ...; }; }' but required in type 'BootstrapPayload'.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Module.require (node:internal/modules/cjs/loader:1289:19) {
+[API]   diagnosticCodes: [ 2741, 2741 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/index.ts(19,42): error TS2345: Argument of type 'MongoClinicRepository | MemoryClinicRepository' is not assignable to parameter of type 'ClinicRepository'.
+[API]   Type 'MongoClinicRepository' is missing the following properties from type 'ClinicRepository': listEstoqueLote, getEstoqueLoteById, getEstoqueLoteByProduct, createEstoqueLote, and 4 more.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+[API]   diagnosticCodes: [ 2345 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/index.ts(19,42): error TS2345: Argument of type 'MongoClinicRepository | MemoryClinicRepository' is not assignable to parameter of type 'ClinicRepository'.
+[API]   Type 'MongoClinicRepository' is missing the following properties from type 'ClinicRepository': listEstoqueLote, getEstoqueLoteById, getEstoqueLoteByProduct, createEstoqueLote, and 4 more.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+[API]   diagnosticCodes: [ 2345 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/index.ts(19,42): error TS2345: Argument of type 'MongoClinicRepository | MemoryClinicRepository' is not assignable to parameter of type 'ClinicRepository'.
+[API]   Type 'MongoClinicRepository' is missing the following properties from type 'ClinicRepository': listEstoqueLote, getEstoqueLoteById, getEstoqueLoteByProduct, createEstoqueLote, and 4 more.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+[API]   diagnosticCodes: [ 2345 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/index.ts(19,42): error TS2345: Argument of type 'MongoClinicRepository | MemoryClinicRepository' is not assignable to parameter of type 'ClinicRepository'.
+[API]   Type 'MongoClinicRepository' is missing the following properties from type 'ClinicRepository': listEstoqueLote, getEstoqueLoteById, getEstoqueLoteByProduct, createEstoqueLote, and 4 more.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+[API]   diagnosticCodes: [ 2345 ]
+[API] }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/index.ts(19,42): error TS2345: Argument of type 'MongoClinicRepository | MemoryClinicRepository' is not assignable to parameter of type 'ClinicRepository'.
+[API]   Type 'MongoClinicRepository' is missing the following properties from type 'ClinicRepository': listEstoqueLote, getEstoqueLoteById, getEstoqueLoteByProduct, createEstoqueLote, and 4 more.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+[API]   diagnosticCodes: [ 2345 ]
+[API] }
+[API] [32m[nodemon] restarting due to changes...[39m
+[API] [32m[nodemon] starting `ts-node src/index.ts`[39m
+[API] C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859
+[API]     return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+[API]            ^
+[API] TSError: ⨯ Unable to compile TypeScript:
+[API] src/index.ts(19,42): error TS2345: Argument of type 'MongoClinicRepository | MemoryClinicRepository' is not assignable to parameter of type 'ClinicRepository'.
+[API]   Type 'MongoClinicRepository' is missing the following properties from type 'ClinicRepository': listEstoqueLote, getEstoqueLoteById, getEstoqueLoteByProduct, createEstoqueLote, and 4 more.
+[API] 
+[API]     at createTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:859:12)
+[API]     at reportTSError (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:863:19)
+[API]     at getOutput (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1077:36)
+[API]     at Object.compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1433:41)
+[API]     at Module.m._compile (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1617:30)
+[API]     at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+[API]     at Object.require.extensions.<computed> [as .ts] (C:\Users\mannu.DESKTOP-NUBOPUS\Videos\app\server\node_modules\ts-node\src\index.ts:1621:12)
+[API]     at Module.load (node:internal/modules/cjs/loader:1266:32)
+[API]     at Function.Module._load (node:internal/modules/cjs/loader:1091:12)
+[API]     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12) {
+[API]   diagnosticCodes: [ 2345 ]
+[API] }
+[API] [31m[nodemon] app crashed - waiting for file changes before starting...[39m
