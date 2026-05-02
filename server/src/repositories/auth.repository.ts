@@ -8,23 +8,19 @@ export interface AuthRepository {
   createSession(userId: string, expiresAt: Date): Promise<{ token: string; session: Session }>;
   findSessionByToken(token: string): Promise<Session | null>;
   deleteSessionByToken(token: string): Promise<void>;
-  seedDefaultAdmin(passwordHash: string): Promise<void>;
+  ensureDefaultUser(passwordHash: string): Promise<void>;
 }
 
-const defaultAdmin: PublicUser = {
-  id: 'u-admin-default',
-  name: 'Administrador',
+const defaultUser: PublicUser = {
+  id: 'u-default-teste',
+  name: 'teste',
   email: 'teste@teste.com',
   role: 'admin',
 };
 
 export class MemoryAuthRepository implements AuthRepository {
-  private users: User[] = [{ ...defaultAdmin, passwordHash: '' }];
+  private users: User[] = [];
   private sessions: Session[] = [];
-
-  constructor(private readonly defaultPasswordHash: string) {
-    this.users[0].passwordHash = defaultPasswordHash;
-  }
 
   async findUserByEmail(email: string): Promise<User | null> {
     return this.users.find((user) => user.email === normalizeEmail(email)) || null;
@@ -58,15 +54,15 @@ export class MemoryAuthRepository implements AuthRepository {
     this.sessions = this.sessions.filter((session) => session.tokenHash !== tokenHash);
   }
 
-  async seedDefaultAdmin(passwordHash: string): Promise<void> {
-    const existingUser = await this.findUserByEmail(defaultAdmin.email);
+  async ensureDefaultUser(passwordHash: string): Promise<void> {
+    const existingUser = await this.findUserByEmail(defaultUser.email);
 
     if (!existingUser) {
-      this.users.push({ ...defaultAdmin, passwordHash });
+      this.users.push({ ...defaultUser, passwordHash });
       return;
     }
 
-    existingUser.passwordHash = existingUser.passwordHash || passwordHash;
+    Object.assign(existingUser, defaultUser, { passwordHash });
   }
 }
 
@@ -102,18 +98,18 @@ export class MongoAuthRepository implements AuthRepository {
     await SessionModel.deleteOne({ tokenHash: hashToken(token) });
   }
 
-  async seedDefaultAdmin(passwordHash: string): Promise<void> {
+  async ensureDefaultUser(passwordHash: string): Promise<void> {
     await UserModel.updateOne(
-      { email: defaultAdmin.email },
+      { email: normalizeEmail(defaultUser.email) },
       {
         $set: {
-          id: defaultAdmin.id,
-          name: defaultAdmin.name,
-          role: defaultAdmin.role,
+          id: defaultUser.id,
+          name: defaultUser.name,
+          role: defaultUser.role,
           passwordHash,
         },
         $setOnInsert: {
-          email: defaultAdmin.email,
+          email: normalizeEmail(defaultUser.email),
         },
       },
       { upsert: true },

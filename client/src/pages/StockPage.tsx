@@ -26,8 +26,7 @@ import { productCategories } from '../types'
 import type { Order } from '../utils/sort'
 import { getComparator } from '../utils/sort'
 
-
-const headCells = [
+const headCells: { id: OrderKey; label: string; align?: 'left' | 'right' | 'center' }[] = [
   { id: 'nome', label: 'Produto' },
   { id: 'categoria', label: 'Categoria' },
   { id: 'tipoProduto', label: 'Tipo' },
@@ -71,7 +70,7 @@ export function StockPage({ products, productStocks, onNewProduct, onNewStockMov
 
         return matchesTerm && matchesCategory && matchesStatus
       })
-      .sort(getComparator<OrderKey>(order, orderBy))
+      .sort(getComparator<Product>(order, orderBy))
   }, [products, searchTerm, categoryFilter, statusFilter, order, orderBy])
 
   useEffect(() => {
@@ -92,9 +91,9 @@ export function StockPage({ products, productStocks, onNewProduct, onNewStockMov
         <Typography variant="overline" color="text.secondary" sx={{ fontWeight: 800 }}>
           Estoque / Produtos
         </Typography>
-        <Typography variant="h4">Produtos e serviÃ§os</Typography>
+        <Typography variant="h4">Produtos e Serviços</Typography>
         <Typography color="text.secondary" sx={{ mt: 0.5, maxWidth: 720 }}>
-          Cadastro base para itens que podem ou nÃ£o controlar estoque, lote e validade.
+          Cadastro base para itens que podem ou não controlar estoque, lote e validade.
         </Typography>
       </Box>
 
@@ -164,7 +163,7 @@ export function StockPage({ products, productStocks, onNewProduct, onNewStockMov
                 <TableCell align="center">Saldo</TableCell>
                 <TableCell>Controle</TableCell>
                 <TableCell>Status</TableCell>
-                <TableCell align="right">AÃ§Ãµes</TableCell>
+                <TableCell align="right">Ações</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

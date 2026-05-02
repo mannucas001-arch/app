@@ -19,5 +19,8 @@ function createClinicRouter(controller) {
     router.get('/stock-items', controller.listStockItems);
     router.get('/products', controller.listProducts);
     router.post('/products', controller.createProduct);
+    router.get('/product-stocks', controller.listProductStocks);
+    router.get('/stock-movements', controller.listStockMovements);
+    router.post('/stock-movements', controller.createStockMovement);
     return router;
 }

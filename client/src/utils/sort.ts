@@ -16,8 +16,8 @@ export function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0
 }
 
-export function getComparator<Key extends keyof any>(order: Order, orderBy: Key) {
-  return (a: { [key in Key]: any }, b: { [key in Key]: any }) => {
+export function getComparator<T>(order: Order, orderBy: keyof T) {
+  return (a: T, b: T) => {
     const comp = descendingComparator(a, b, orderBy)
     return order === 'desc' ? comp : -comp
   }

@@ -11,6 +11,7 @@ import type {
   ProductCategory,
   ProductType,
   StockEntry,
+  StockEntryType,
   StockMovementOrigin,
   StockMovementType,
 } from '../domain/entities';
@@ -28,6 +29,7 @@ const productCategories: ProductCategory[] = [
 ];
 
 const productTypes: ProductType[] = ['Produto', 'Medicamento', 'Vacina', 'Servico', 'Material de consumo'];
+const stockEntryTypes: StockEntryType[] = ['COMPRA', 'DEVOLUCAO_CLIENTE', 'BONIFICACAO', 'AJUSTE_POSITIVO', 'TRANSFERENCIA'];
 const stockMovementTypes: StockMovementType[] = [
   'ENTRADA',
   'SAIDA',
@@ -38,12 +40,15 @@ const stockMovementTypes: StockMovementType[] = [
 ];
 const stockMovementOrigins: StockMovementOrigin[] = [
   'COMPRA',
+  'DEVOLUCAO_CLIENTE',
+  'BONIFICACAO',
   'VENDA',
   'ATENDIMENTO',
   'VACINACAO',
   'PROCEDIMENTO',
   'INVENTARIO',
   'AJUSTE_MANUAL',
+  'AJUSTE_POSITIVO',
   'CANCELAMENTO',
   'DEVOLUCAO',
   'TRANSFERENCIA',
@@ -352,6 +357,84 @@ function validateNonNegative(value: number, message: string) {
   if (!Number.isFinite(value) || value < 0) {
     throw new ClinicValidationError(message);
   }
+}
+
+function normalizeEstoqueLoteInput(input: CreateEstoqueLoteInput): CreateEstoqueLoteInput {
+  return {
+    produtoId: input.produtoId?.trim() || '',
+    numeroLote: input.numeroLote?.trim() || '',
+    dataValidade: input.dataValidade ? new Date(input.dataValidade) : new Date(''),
+    quantidadeAtual: Number(input.quantidadeAtual ?? 0),
+    custoUnitario: Number(input.custoUnitario ?? 0),
+    ativo: input.ativo ?? true,
+  };
+}
+
+function validateEstoqueLote(input: CreateEstoqueLoteInput) {
+  if (!input.produtoId) {
+    throw new ClinicValidationError('Produto e obrigatorio para o lote');
+  }
+
+  if (!input.numeroLote) {
+    throw new ClinicValidationError('Numero do lote e obrigatorio');
+  }
+
+  if (Number.isNaN(input.dataValidade.getTime())) {
+    throw new ClinicValidationError('Validade do lote e obrigatoria');
+  }
+
+  if (!Number.isFinite(input.quantidadeAtual) || input.quantidadeAtual <= 0) {
+    throw new ClinicValidationError('Quantidade do lote deve ser maior que zero');
+  }
+
+  validateNonNegative(input.custoUnitario, 'Custo unitario nao pode ser negativo');
+}
+
+function normalizeStockEntryInput(input: CreateStockEntryInput): CreateStockEntryInput {
+  return {
+    fornecedor: input.fornecedor?.trim() || undefined,
+    data: input.data?.trim() || '',
+    tipo: input.tipo,
+    documento: input.documento?.trim() || undefined,
+    observacao: input.observacao?.trim() || undefined,
+    itens: (input.itens || []).map((item) => ({
+      produtoId: item.produtoId?.trim() || '',
+      quantidade: Number(item.quantidade ?? 0),
+      valorUnitario: Number(item.valorUnitario ?? 0),
+      lote: item.lote?.trim() || undefined,
+      validade: item.validade ? new Date(item.validade) : undefined,
+    })),
+  };
+}
+
+function validateStockEntry(input: CreateStockEntryInput) {
+  if (!input.data) {
+    throw new ClinicValidationError('Data da entrada e obrigatoria');
+  }
+
+  if (!input.tipo || !stockEntryTypes.includes(input.tipo)) {
+    throw new ClinicValidationError('Tipo da entrada de estoque invalido');
+  }
+
+  if (!input.itens.length) {
+    throw new ClinicValidationError('Entrada de estoque deve ter ao menos um item');
+  }
+
+  input.itens.forEach((item) => {
+    if (!item.produtoId) {
+      throw new ClinicValidationError('Produto e obrigatorio para todos os itens');
+    }
+
+    if (!Number.isFinite(item.quantidade) || item.quantidade <= 0) {
+      throw new ClinicValidationError('Quantidade do item deve ser maior que zero');
+    }
+
+    validateNonNegative(item.valorUnitario, 'Valor unitario nao pode ser negativo');
+
+    if (item.validade && Number.isNaN(item.validade.getTime())) {
+      throw new ClinicValidationError('Validade do item invalida');
+    }
+  });
 }
 
 function normalizeStockMovementInput(input: CreateStockMovementInput): CreateStockMovementInput {

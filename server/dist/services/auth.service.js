@@ -13,8 +13,8 @@ class AuthService {
         this.repository = repository;
         this.passwordHasher = passwordHasher;
     }
-    async seedDefaultAdmin() {
-        await this.repository.seedDefaultAdmin(this.passwordHasher.hash('teste'));
+    async ensureDefaultUser() {
+        await this.repository.ensureDefaultUser(this.passwordHasher.hash('teste'));
     }
     async login(input) {
         const user = await this.repository.findUserByEmail(input.email);

@@ -4,20 +4,15 @@ exports.MongoAuthRepository = exports.MemoryAuthRepository = void 0;
 exports.toPublicUser = toPublicUser;
 const crypto_1 = require("crypto");
 const clinic_models_1 = require("../models/clinic.models");
-const defaultAdmin = {
-    id: 'u-admin-default',
-    name: 'Administrador',
+const defaultUser = {
+    id: 'u-default-teste',
+    name: 'teste',
     email: 'teste@teste.com',
     role: 'admin',
 };
 class MemoryAuthRepository {
-    defaultPasswordHash;
-    users = [{ ...defaultAdmin, passwordHash: '' }];
+    users = [];
     sessions = [];
-    constructor(defaultPasswordHash) {
-        this.defaultPasswordHash = defaultPasswordHash;
-        this.users[0].passwordHash = defaultPasswordHash;
-    }
     async findUserByEmail(email) {
         return this.users.find((user) => user.email === normalizeEmail(email)) || null;
     }
@@ -44,13 +39,13 @@ class MemoryAuthRepository {
         const tokenHash = hashToken(token);
         this.sessions = this.sessions.filter((session) => session.tokenHash !== tokenHash);
     }
-    async seedDefaultAdmin(passwordHash) {
-        const existingUser = await this.findUserByEmail(defaultAdmin.email);
+    async ensureDefaultUser(passwordHash) {
+        const existingUser = await this.findUserByEmail(defaultUser.email);
         if (!existingUser) {
-            this.users.push({ ...defaultAdmin, passwordHash });
+            this.users.push({ ...defaultUser, passwordHash });
             return;
         }
-        existingUser.passwordHash = existingUser.passwordHash || passwordHash;
+        Object.assign(existingUser, defaultUser, { passwordHash });
     }
 }
 exports.MemoryAuthRepository = MemoryAuthRepository;
@@ -80,16 +75,16 @@ class MongoAuthRepository {
     async deleteSessionByToken(token) {
         await clinic_models_1.SessionModel.deleteOne({ tokenHash: hashToken(token) });
     }
-    async seedDefaultAdmin(passwordHash) {
-        await clinic_models_1.UserModel.updateOne({ email: defaultAdmin.email }, {
+    async ensureDefaultUser(passwordHash) {
+        await clinic_models_1.UserModel.updateOne({ email: normalizeEmail(defaultUser.email) }, {
             $set: {
-                id: defaultAdmin.id,
-                name: defaultAdmin.name,
-                role: defaultAdmin.role,
+                id: defaultUser.id,
+                name: defaultUser.name,
+                role: defaultUser.role,
                 passwordHash,
             },
             $setOnInsert: {
-                email: defaultAdmin.email,
+                email: normalizeEmail(defaultUser.email),
             },
         }, { upsert: true });
     }

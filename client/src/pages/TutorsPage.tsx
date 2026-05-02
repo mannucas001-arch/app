@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Chip, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material'
 import { AddRounded, SearchRounded } from '@mui/icons-material'
-import type { Breed, Pet, Tutor } from '../types'
+import type { Pet, Tutor } from '../types'
 import { initials } from '../utils/format'
 
 type Props = {

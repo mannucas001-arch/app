@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Chip, InputAdornment, Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import { AddRounded, PetsRounded, SearchRounded } from '@mui/icons-material'
 import type { Breed, Pet, Tutor } from '../types'
-import { formatDate, getBreedName, getTutorName } from '../utils/format'
+import { getBreedName, getTutorName } from '../utils/format'
 
 type Props = {
   pets: Pet[]

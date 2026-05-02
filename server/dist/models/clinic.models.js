@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductModel = exports.StockItemModel = exports.FinancialEntryModel = exports.MedicalRecordModel = exports.AppointmentModel = exports.TutorModel = exports.PetModel = exports.BreedModel = exports.SessionModel = exports.UserModel = void 0;
+exports.StockEntryModel = exports.EstoqueLoteModel = exports.ProductStockModel = exports.StockMovementModel = exports.ProductModel = exports.StockItemModel = exports.FinancialEntryModel = exports.MedicalRecordModel = exports.AppointmentModel = exports.TutorModel = exports.PetModel = exports.BreedModel = exports.SessionModel = exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 const baseOptions = {
     versionKey: false,
@@ -115,6 +115,86 @@ const productSchema = new mongoose_1.Schema({
     controlaValidade: { type: Boolean, required: true, default: false },
     ativo: { type: Boolean, required: true, default: true },
 }, baseOptions);
+const stockMovementSchema = new mongoose_1.Schema({
+    id: { type: String, required: true, unique: true },
+    produtoId: { type: String, required: true, index: true },
+    loteId: { type: String },
+    tipoMovimentacao: {
+        type: String,
+        enum: ['ENTRADA', 'SAIDA', 'ESTORNO_ENTRADA', 'ESTORNO_SAIDA', 'AJUSTE_POSITIVO', 'AJUSTE_NEGATIVO'],
+        required: true,
+    },
+    origem: {
+        type: String,
+        enum: [
+            'COMPRA',
+            'DEVOLUCAO_CLIENTE',
+            'BONIFICACAO',
+            'VENDA',
+            'ATENDIMENTO',
+            'VACINACAO',
+            'PROCEDIMENTO',
+            'INVENTARIO',
+            'AJUSTE_MANUAL',
+            'AJUSTE_POSITIVO',
+            'CANCELAMENTO',
+            'DEVOLUCAO',
+            'TRANSFERENCIA',
+        ],
+        required: true,
+    },
+    quantidade: { type: Number, required: true, min: 0 },
+    saldoAnterior: { type: Number, required: true },
+    saldoPosterior: { type: Number, required: true },
+    custoUnitario: { type: Number, required: true, min: 0 },
+    valorTotal: { type: Number, required: true, min: 0 },
+    usuarioId: { type: String },
+    observacao: { type: String, default: '' },
+    documentoReferencia: { type: String, default: '' },
+}, {
+    versionKey: false,
+    timestamps: { createdAt: true, updatedAt: false },
+});
+const productStockSchema = new mongoose_1.Schema({
+    id: { type: String, required: true, unique: true },
+    produtoId: { type: String, required: true, unique: true, index: true },
+    quantidadeAtual: { type: Number, required: true, min: 0, default: 0 },
+    quantidadeReservada: { type: Number, required: true, min: 0, default: 0 },
+}, {
+    versionKey: false,
+    timestamps: { createdAt: false, updatedAt: true },
+});
+const estoqueLoteSchema = new mongoose_1.Schema({
+    id: { type: String, required: true, unique: true },
+    produtoId: { type: String, required: true, index: true },
+    numeroLote: { type: String, required: true, trim: true },
+    dataValidade: { type: Date, required: true, index: true },
+    quantidadeAtual: { type: Number, required: true, min: 0, default: 0 },
+    custoUnitario: { type: Number, required: true, min: 0, default: 0 },
+    ativo: { type: Boolean, required: true, default: true },
+}, baseOptions);
+const stockEntryItemSchema = new mongoose_1.Schema({
+    id: { type: String, required: true },
+    produtoId: { type: String, required: true, index: true },
+    quantidade: { type: Number, required: true, min: 0 },
+    valorUnitario: { type: Number, required: true, min: 0 },
+    lote: { type: String, trim: true },
+    validade: { type: Date },
+}, { _id: false, versionKey: false });
+const stockEntrySchema = new mongoose_1.Schema({
+    id: { type: String, required: true, unique: true },
+    fornecedor: { type: String, trim: true },
+    data: { type: String, required: true },
+    tipo: {
+        type: String,
+        enum: ['COMPRA', 'DEVOLUCAO_CLIENTE', 'BONIFICACAO', 'AJUSTE_POSITIVO', 'TRANSFERENCIA'],
+        required: true,
+    },
+    documento: { type: String, trim: true },
+    observacao: { type: String, trim: true },
+    itens: { type: [stockEntryItemSchema], required: true, default: [] },
+    confirmado: { type: Boolean, required: true, default: false },
+}, baseOptions);
 exports.UserModel = mongoose_1.models.User || (0, mongoose_1.model)('User', userSchema);
 exports.SessionModel = mongoose_1.models.Session || (0, mongoose_1.model)('Session', sessionSchema);
 exports.BreedModel = mongoose_1.models.Breed || (0, mongoose_1.model)('Breed', breedSchema);
@@ -125,3 +205,7 @@ exports.MedicalRecordModel = mongoose_1.models.MedicalRecord || (0, mongoose_1.m
 exports.FinancialEntryModel = mongoose_1.models.FinancialEntry || (0, mongoose_1.model)('FinancialEntry', financialEntrySchema);
 exports.StockItemModel = mongoose_1.models.StockItem || (0, mongoose_1.model)('StockItem', stockItemSchema);
 exports.ProductModel = mongoose_1.models.Product || (0, mongoose_1.model)('Product', productSchema);
+exports.StockMovementModel = mongoose_1.models.MovimentacaoEstoque || (0, mongoose_1.model)('MovimentacaoEstoque', stockMovementSchema);
+exports.ProductStockModel = mongoose_1.models.EstoqueProduto || (0, mongoose_1.model)('EstoqueProduto', productStockSchema);
+exports.EstoqueLoteModel = mongoose_1.models.EstoqueLote || (0, mongoose_1.model)('EstoqueLote', estoqueLoteSchema);
+exports.StockEntryModel = mongoose_1.models.StockEntry || (0, mongoose_1.model)('StockEntry', stockEntrySchema);

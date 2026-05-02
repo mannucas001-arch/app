@@ -18,33 +18,21 @@ import type {
   Pet,
   Product,
   StockEntry,
-  StockEntryItem,
   StockItem,
   Tutor,
   User,
 } from '../domain/entities';
-import {
-  appointmentsSeed,
-  breedsSeed,
-  estoquesLoteSeed,
-  estoquesProdutoSeed,
-  financialEntriesSeed,
-  medicalRecordsSeed,
-  movimentacoesEstoqueSeed,
-  petsSeed,
-  productsSeed,
-  stockItemsSeed,
-  tutorsSeed,
-  usersSeed,
-} from '../data/seed';
+import { defaultBreeds } from '../data/default-breeds';
 import {
   AppointmentModel,
   BreedModel,
+  EstoqueLoteModel,
   FinancialEntryModel,
   MedicalRecordModel,
   PetModel,
   ProductModel,
   ProductStockModel,
+  StockEntryModel,
   StockMovementModel,
   StockItemModel,
   TutorModel,
@@ -92,6 +80,7 @@ function calculateSummary(
   financialEntries: FinancialEntry[],
   stockItems: StockItem[],
 ) {
+  const today = formatDateKey(new Date());
   const receivables = financialEntries
     .filter((entry) => entry.type === 'receita')
     .reduce((total, entry) => total + entry.amount, 0);
@@ -103,29 +92,34 @@ function calculateSummary(
     tutors: tutors.length,
     pets: pets.length,
     breeds: breeds.length,
-    appointmentsToday: appointments.filter((appointment) => appointment.date === '2026-05-01').length,
+    appointmentsToday: appointments.filter((appointment) => appointment.date === today).length,
     lowStock: stockItems.filter((item) => item.status !== 'ok').length,
     cashBalance: receivables - payables,
   };
 }
 
-function clone<T>(value: T): T {
-  return JSON.parse(JSON.stringify(value)) as T;
+function formatDateKey(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
 }
 
 export class MemoryClinicRepository implements ClinicRepository {
-  private users = clone(usersSeed);
-  private tutors = clone(tutorsSeed);
-  private pets = clone(petsSeed);
-  private breeds = clone(breedsSeed);
-  private appointments = clone(appointmentsSeed);
-  private medicalRecords = clone(medicalRecordsSeed);
-  private financialEntries = clone(financialEntriesSeed);
-  private stockItems = clone(stockItemsSeed);
-  private products = clone(productsSeed);
-  private estoquesProduto = clone(estoquesProdutoSeed);
-  private estoquesLote = clone(estoquesLoteSeed);
-  private movimentacoesEstoque = clone(movimentacoesEstoqueSeed);
+  private users: User[] = [];
+  private tutors: Tutor[] = [];
+  private pets: Pet[] = [];
+  private breeds: Breed[] = [];
+  private appointments: Appointment[] = [];
+  private medicalRecords: MedicalRecord[] = [];
+  private financialEntries: FinancialEntry[] = [];
+  private stockItems: StockItem[] = [];
+  private products: Product[] = [];
+  private stockEntries: StockEntry[] = [];
+  private estoquesProduto: EstoqueProduto[] = [];
+  private estoquesLote: EstoqueLote[] = [];
+  private movimentacoesEstoque: MovimentacaoEstoque[] = [];
 
   async getBootstrap(): Promise<BootstrapPayload> {
     return {
@@ -138,6 +132,7 @@ export class MemoryClinicRepository implements ClinicRepository {
       financialEntries: this.financialEntries,
       stockItems: this.stockItems,
       products: this.products,
+      stockEntries: this.stockEntries,
       estoquesProduto: this.estoquesProduto,
       estoquesLote: this.estoquesLote,
       movimentacoesEstoque: this.movimentacoesEstoque,
@@ -370,71 +365,50 @@ export class MemoryClinicRepository implements ClinicRepository {
   }
 
   async listStockEntries(): Promise<StockEntry[]> {
-    // Implementar quando necessário
-    return [];
+    return this.stockEntries;
   }
 
   async createStockEntry(input: CreateStockEntryInput): Promise<StockEntry> {
     const entry: StockEntry = {
       id: `entry-${Date.now()}`,
       ...input,
+      itens: input.itens.map((item, index) => ({
+        id: `entry-item-${Date.now()}-${index}`,
+        ...item,
+      })),
       confirmado: false,
       createdAt: new Date(),
     };
-    // Adicionar à lista se houver
+
+    this.stockEntries.push(entry);
     return entry;
   }
 
   async confirmStockEntry(entryId: string): Promise<StockEntry> {
-    // Implementar quando necessário
-    throw new Error('Método não implementado');
+    const entry = this.stockEntries.find((item) => item.id === entryId);
+
+    if (!entry) {
+      throw new Error('Entrada de estoque nao encontrada');
+    }
+
+    if (entry.confirmado) {
+      throw new Error('Entrada de estoque ja confirmada');
+    }
+
+    entry.confirmado = true;
+    return entry;
   }
 }
 
 export class MongoClinicRepository implements ClinicRepository {
-  async seedIfEmpty(): Promise<void> {
-    const [
-      userCount,
-      tutorCount,
-      breedCount,
-      petCount,
-      appointmentCount,
-      recordCount,
-      financialCount,
-      stockCount,
-      productCount,
-      productStockCount,
-      stockMovementCount,
-    ] =
-      await Promise.all([
-        UserModel.countDocuments(),
-        TutorModel.countDocuments(),
-        BreedModel.countDocuments(),
-        PetModel.countDocuments(),
-        AppointmentModel.countDocuments(),
-        MedicalRecordModel.countDocuments(),
-        FinancialEntryModel.countDocuments(),
-        StockItemModel.countDocuments(),
-        ProductModel.countDocuments(),
-        ProductStockModel.countDocuments(),
-        StockMovementModel.countDocuments(),
-      ]);
+  async ensureDefaultBreeds(): Promise<void> {
+    const breedCount = await BreedModel.countDocuments();
 
-    await Promise.all([
-      userCount === 0 ? UserModel.insertMany(usersSeed) : Promise.resolve(),
-      tutorCount === 0 ? TutorModel.insertMany(tutorsSeed) : Promise.resolve(),
-      breedCount === 0 ? BreedModel.insertMany(breedsSeed) : Promise.resolve(),
-      petCount === 0 ? PetModel.insertMany(petsSeed) : Promise.resolve(),
-      appointmentCount === 0 ? AppointmentModel.insertMany(appointmentsSeed) : Promise.resolve(),
-      recordCount === 0 ? MedicalRecordModel.insertMany(medicalRecordsSeed) : Promise.resolve(),
-      financialCount === 0 ? FinancialEntryModel.insertMany(financialEntriesSeed) : Promise.resolve(),
-      stockCount === 0 ? StockItemModel.insertMany(stockItemsSeed) : Promise.resolve(),
-      productCount === 0 ? ProductModel.insertMany(productsSeed) : Promise.resolve(),
-      productStockCount === 0 ? ProductStockModel.insertMany(estoquesProdutoSeed) : Promise.resolve(),
-      stockMovementCount === 0 ? StockMovementModel.insertMany(movimentacoesEstoqueSeed) : Promise.resolve(),
-    ]);
+    if (breedCount > 0) {
+      return;
+    }
 
-    await this.ensureStockForControlledProducts();
+    await BreedModel.insertMany(defaultBreeds);
   }
 
   async getBootstrap(): Promise<BootstrapPayload> {
@@ -448,7 +422,9 @@ export class MongoClinicRepository implements ClinicRepository {
       financialEntries,
       stockItems,
       products,
+      stockEntries,
       productStocks,
+      estoquesLote,
       stockMovements,
     ] =
       await Promise.all([
@@ -461,7 +437,9 @@ export class MongoClinicRepository implements ClinicRepository {
         FinancialEntryModel.find().sort({ dueDate: 1 }).lean(),
         StockItemModel.find().sort({ status: 1 }).lean(),
         ProductModel.find().sort({ nome: 1 }).lean(),
+        StockEntryModel.find().sort({ createdAt: -1 }).lean(),
         ProductStockModel.find().sort({ produtoId: 1 }).lean(),
+        EstoqueLoteModel.find().sort({ produtoId: 1, dataValidade: 1 }).lean(),
         StockMovementModel.find().sort({ createdAt: -1 }).limit(50).lean(),
       ]);
 
@@ -472,7 +450,9 @@ export class MongoClinicRepository implements ClinicRepository {
     const typedFinancialEntries = usersToPlain<FinancialEntry>(financialEntries);
     const typedStockItems = usersToPlain<StockItem>(stockItems);
     const typedProducts = usersToPlain<Product>(products);
+    const typedStockEntries = usersToPlain<StockEntry>(stockEntries);
     const typedProductStocks = usersToPlain<EstoqueProduto>(productStocks);
+    const typedEstoquesLote = usersToPlain<EstoqueLote>(estoquesLote);
     const typedStockMovements = usersToPlain<MovimentacaoEstoque>(stockMovements);
 
     return {
@@ -485,7 +465,9 @@ export class MongoClinicRepository implements ClinicRepository {
       financialEntries: typedFinancialEntries,
       stockItems: typedStockItems,
       products: typedProducts,
+      stockEntries: typedStockEntries,
       estoquesProduto: typedProductStocks,
+      estoquesLote: typedEstoquesLote,
       movimentacoesEstoque: typedStockMovements,
       summary: calculateSummary(
         typedTutors,
@@ -644,28 +626,82 @@ export class MongoClinicRepository implements ClinicRepository {
     return movement.toObject() as MovimentacaoEstoque;
   }
 
-  private async ensureStockForControlledProducts() {
-    const controlledProducts = await ProductModel.find({ controlaEstoque: true }).lean();
-
-    await Promise.all(
-      controlledProducts.map(async (product) => {
-        const lastMovement = await StockMovementModel.findOne({ produtoId: product.id }).sort({ createdAt: -1 }).lean();
-
-        return ProductStockModel.updateOne(
-          { produtoId: product.id },
-          {
-            $setOnInsert: {
-              id: `est-${product.id}`,
-              produtoId: product.id,
-              quantidadeAtual: lastMovement?.saldoPosterior || 0,
-              quantidadeReservada: 0,
-            },
-          },
-          { upsert: true },
-        );
-      }),
+  async listEstoqueLote(): Promise<EstoqueLote[]> {
+    return usersToPlain<EstoqueLote>(
+      await EstoqueLoteModel.find().sort({ produtoId: 1, dataValidade: 1 }).lean(),
     );
   }
+
+  async getEstoqueLoteById(id: string): Promise<EstoqueLote | null> {
+    return (await EstoqueLoteModel.findOne({ id }).lean()) as EstoqueLote | null;
+  }
+
+  async getEstoqueLoteByProduct(productId: string): Promise<EstoqueLote[]> {
+    return usersToPlain<EstoqueLote>(
+      await EstoqueLoteModel.find({ produtoId: productId, ativo: true }).sort({ dataValidade: 1 }).lean(),
+    );
+  }
+
+  async createEstoqueLote(input: CreateEstoqueLoteInput): Promise<EstoqueLote> {
+    const lote = await EstoqueLoteModel.create({
+      id: `lote-${Date.now()}`,
+      ...input,
+    });
+
+    return lote.toObject() as EstoqueLote;
+  }
+
+  async updateEstoqueLote(id: string, quantidadeAtual: number, custoUnitario?: number): Promise<EstoqueLote> {
+    const update: { quantidadeAtual: number; custoUnitario?: number } = { quantidadeAtual };
+
+    if (custoUnitario !== undefined) {
+      update.custoUnitario = custoUnitario;
+    }
+
+    const lote = await EstoqueLoteModel.findOneAndUpdate({ id }, update, { new: true });
+
+    if (!lote) {
+      throw new Error('Lote nao encontrado');
+    }
+
+    return lote.toObject() as EstoqueLote;
+  }
+
+  async listStockEntries(): Promise<StockEntry[]> {
+    return usersToPlain<StockEntry>(await StockEntryModel.find().sort({ createdAt: -1 }).lean());
+  }
+
+  async createStockEntry(input: CreateStockEntryInput): Promise<StockEntry> {
+    const entry = await StockEntryModel.create({
+      id: `entry-${Date.now()}`,
+      ...input,
+      itens: input.itens.map((item, index) => ({
+        id: `entry-item-${Date.now()}-${index}`,
+        ...item,
+      })),
+      confirmado: false,
+    });
+
+    return entry.toObject() as StockEntry;
+  }
+
+  async confirmStockEntry(entryId: string): Promise<StockEntry> {
+    const entry = await StockEntryModel.findOne({ id: entryId });
+
+    if (!entry) {
+      throw new Error('Entrada de estoque nao encontrada');
+    }
+
+    if (entry.confirmado) {
+      throw new Error('Entrada de estoque ja confirmada');
+    }
+
+    entry.confirmado = true;
+    await entry.save();
+
+    return entry.toObject() as StockEntry;
+  }
+
 }
 
 function usersToPlain<T>(documents: unknown): T[] {

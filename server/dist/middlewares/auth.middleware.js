@@ -14,6 +14,7 @@ function createAuthMiddleware(authService) {
             res.status(401).json({ message: 'Sessao expirada' });
             return;
         }
+        req.user = user;
         next();
     };
 }

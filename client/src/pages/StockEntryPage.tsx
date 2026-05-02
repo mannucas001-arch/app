@@ -296,9 +296,7 @@ export function StockEntryPage({ products, stockEntries, onCreateEntry, onConfir
                               size="small"
                               value={item.quantidade}
                               onChange={(e) => handleUpdateItem(item.id, { quantidade: Number(e.target.value) })}
-                              InputProps={{
-                                inputProps: { min: 0, step: 0.01 }
-                              }}
+                              slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
                             />
                           </TableCell>
                           <TableCell align="right">
@@ -308,9 +306,7 @@ export function StockEntryPage({ products, stockEntries, onCreateEntry, onConfir
                               size="small"
                               value={item.valorUnitario}
                               onChange={(e) => handleUpdateItem(item.id, { valorUnitario: Number(e.target.value) })}
-                              InputProps={{
-                                inputProps: { min: 0, step: 0.01 }
-                              }}
+                              slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
                             />
                           </TableCell>
                           <TableCell align="right">R$ {total.toFixed(2)}</TableCell>

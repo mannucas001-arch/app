@@ -13,8 +13,8 @@ export class AuthService {
     private readonly passwordHasher: PasswordHasher,
   ) {}
 
-  async seedDefaultAdmin() {
-    await this.repository.seedDefaultAdmin(this.passwordHasher.hash('teste'));
+  async ensureDefaultUser() {
+    await this.repository.ensureDefaultUser(this.passwordHasher.hash('teste'));
   }
 
   async login(input: LoginInput): Promise<AuthSession> {

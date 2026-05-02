@@ -121,5 +121,30 @@ class ClinicController {
             next(error);
         }
     };
+    listProductStocks = async (_req, res, next) => {
+        try {
+            res.json(await this.service.listProductStocks());
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    listStockMovements = async (_req, res, next) => {
+        try {
+            res.json(await this.service.listStockMovements());
+        }
+        catch (error) {
+            next(error);
+        }
+    };
+    createStockMovement = async (req, res, next) => {
+        try {
+            const user = req.user;
+            res.status(201).json(await this.service.createStockMovement(req.body, user?.id));
+        }
+        catch (error) {
+            next(error);
+        }
+    };
 }
 exports.ClinicController = ClinicController;

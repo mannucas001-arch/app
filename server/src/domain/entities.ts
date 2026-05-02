@@ -21,12 +21,15 @@ export type StockMovementType =
   | 'AJUSTE_NEGATIVO';
 export type StockMovementOrigin =
   | 'COMPRA'
+  | 'DEVOLUCAO_CLIENTE'
+  | 'BONIFICACAO'
   | 'VENDA'
   | 'ATENDIMENTO'
   | 'VACINACAO'
   | 'PROCEDIMENTO'
   | 'INVENTARIO'
   | 'AJUSTE_MANUAL'
+  | 'AJUSTE_POSITIVO'
   | 'CANCELAMENTO'
   | 'DEVOLUCAO'
   | 'TRANSFERENCIA';
@@ -205,6 +208,7 @@ export type BootstrapPayload = {
   financialEntries: FinancialEntry[];
   stockItems: StockItem[];
   products: Product[];
+  stockEntries: StockEntry[];
   estoquesProduto: EstoqueProduto[];
   estoquesLote: EstoqueLote[];
   movimentacoesEstoque: MovimentacaoEstoque[];
@@ -237,6 +241,7 @@ export type StockEntry = {
   tipo: StockEntryType;
   documento?: string;
   observacao?: string;
+  itens: StockEntryItem[];
   confirmado: boolean;
   createdAt: Date;
 };
@@ -250,7 +255,7 @@ export type StockEntryItem = {
   validade?: Date;
 };
 
-export type CreateStockEntryInput = Omit<StockEntry, 'id' | 'confirmado' | 'createdAt'> & {
+export type CreateStockEntryInput = Omit<StockEntry, 'id' | 'itens' | 'confirmado' | 'createdAt'> & {
   itens: Omit<StockEntryItem, 'id'>[];
 };
 

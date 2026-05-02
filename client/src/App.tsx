@@ -62,10 +62,14 @@ import type {
   StockMovement,
   StockMovementOrigin,
   StockMovementType,
+  Tutor,
+  Breed,
+  Pet,
 } from './types'
 
 const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
 const drawerWidth = 270
+const todayDateKey = () => new Date().toLocaleDateString('en-CA')
 
 const theme = createTheme({
   palette: {
@@ -132,202 +136,47 @@ const theme = createTheme({
   },
 })
 
-const fallbackData: BootstrapPayload = {
-  tutors: [
-    {
-      id: 't-1',
-      name: 'Camila Nogueira',
-      phone: '(11) 98822-1044',
-      email: 'camila.nogueira@email.com',
-      address: 'Rua das Palmeiras, 118',
-    },
-    {
-      id: 't-2',
-      name: 'Renato Freitas',
-      phone: '(21) 97644-5531',
-      email: 'renato.freitas@email.com',
-      address: 'Av. Atlantica, 340',
-    },
-  ],
-  breeds: [
-    { id: 'b-1', name: 'Golden Retriever', species: 'Canino', notes: 'Porte grande, perfil familiar.' },
-    { id: 'b-2', name: 'SRD', species: 'Felino', notes: 'Sem raÃ§a definida.' },
-  ],
-  pets: [
-    {
-      id: 'p-1',
-      name: 'Amora',
-      species: 'Canino',
-      breedId: 'b-1',
-      tutorId: 't-1',
-      age: 5,
-      weight: 28.4,
-      alerts: ['Alergia a dipirona', 'Vacina V10 vence em 21 dias'],
-    },
-    {
-      id: 'p-2',
-      name: 'Nino',
-      species: 'Felino',
-      breedId: 'b-2',
-      tutorId: 't-2',
-      age: 3,
-      weight: 4.8,
-      alerts: ['Controle renal semestral'],
-    },
-  ],
-  appointments: [
-    {
-      id: 'a-1',
-      date: '2026-05-01',
-      time: '09:00',
-      tutorName: 'Camila Nogueira',
-      petName: 'Amora',
-      veterinarian: 'Dra. Marina Alves',
-      reason: 'Consulta de rotina',
-      status: 'confirmado',
-    },
-    {
-      id: 'a-2',
-      date: '2026-05-01',
-      time: '10:30',
-      tutorName: 'Renato Freitas',
-      petName: 'Nino',
-      veterinarian: 'Dr. Theo Ramos',
-      reason: 'Retorno nefrologia',
-      status: 'aguardando',
-    },
-  ],
-  medicalRecords: [
-    {
-      id: 'm-1',
-      petName: 'Amora',
-      tutorName: 'Camila Nogueira',
-      date: '2026-04-24',
-      summary: 'Paciente ativa, mucosas normocoradas e sem dor Ã  palpaÃ§Ã£o abdominal.',
-      prescription: 'Suplemento articular por 30 dias e retorno em 45 dias.',
-      vaccines: ['V10', 'Raiva'],
-      exams: ['Hemograma completo'],
-    },
-  ],
-  financialEntries: [
-    {
-      id: 'f-1',
-      description: 'Consulta clÃ­nica - Amora',
-      category: 'Atendimento',
-      type: 'receita',
-      amount: 220,
-      dueDate: '2026-05-01',
-      status: 'pago',
-    },
-    {
-      id: 'f-2',
-      description: 'ReposiÃ§Ã£o de vacinas V10',
-      category: 'Estoque',
-      type: 'despesa',
-      amount: 860,
-      dueDate: '2026-05-03',
-      status: 'pendente',
-    },
-  ],
-  stockItems: [
-    { id: 's-1', name: 'Vacina V10', category: 'Vacinas', quantity: 18, minimum: 10, unit: 'doses', status: 'ok' },
-    { id: 's-2', name: 'Soro fisiolÃ³gico 500ml', category: 'Insumos', quantity: 7, minimum: 12, unit: 'frascos', status: 'baixo' },
-  ],
-  products: [
-    {
-      id: 'prod-1',
-      nome: 'Vacina V10',
-      codigoInterno: 'VAC-V10',
-      codigoBarras: '',
-      categoria: 'Vacina',
-      tipoProduto: 'Vacina',
-      unidadeMedida: 'dose',
-      precoCusto: 43,
-      precoVenda: 95,
-      estoqueMinimo: 10,
-      estoqueMaximo: 60,
-      controlaEstoque: true,
-      controlaLote: true,
-      controlaValidade: true,
-      ativo: true,
-      createdAt: '2026-05-01T09:00:00.000Z',
-      updatedAt: '2026-05-01T09:00:00.000Z',
-    },
-    {
-      id: 'prod-2',
-      nome: 'Consulta clÃ­nica',
-      codigoInterno: 'SERV-CONSULTA',
-      codigoBarras: '',
-      categoria: 'Outros',
-      tipoProduto: 'Servico',
-      unidadeMedida: 'serviÃ§o',
-      precoCusto: 0,
-      precoVenda: 220,
-      estoqueMinimo: 0,
-      estoqueMaximo: 0,
-      controlaEstoque: false,
-      controlaLote: false,
-      controlaValidade: false,
-      ativo: true,
-      createdAt: '2026-05-01T09:00:00.000Z',
-      updatedAt: '2026-05-01T09:00:00.000Z',
-    },
-  ],
+const emptyData: BootstrapPayload = {
+  tutors: [],
+  pets: [],
+  breeds: [],
+  appointments: [],
+  medicalRecords: [],
+  financialEntries: [],
+  stockItems: [],
+  products: [],
   stockEntries: [],
-  estoquesProduto: [
-    {
-      id: 'est-prod-1',
-      produtoId: 'prod-1',
-      quantidadeAtual: 18,
-      quantidadeReservada: 0,
-      updatedAt: '2026-05-01T09:00:00.000Z',
-    },
-  ],
-  movimentacoesEstoque: [
-    {
-      id: 'mov-1',
-      produtoId: 'prod-1',
-      tipoMovimentacao: 'ENTRADA',
-      origem: 'COMPRA',
-      quantidade: 18,
-      saldoAnterior: 0,
-      saldoPosterior: 18,
-      custoUnitario: 43,
-      valorTotal: 774,
-      usuarioId: 'u-1',
-      observacao: 'Carga inicial de vacinas',
-      documentoReferencia: 'NF-1001',
-      createdAt: '2026-05-01T09:00:00.000Z',
-    },
-  ],
+  estoquesProduto: [],
+  estoquesLote: [],
+  movimentacoesEstoque: [],
   summary: {
-    tutors: 2,
-    pets: 2,
-    breeds: 2,
-    appointmentsToday: 2,
-    lowStock: 1,
-    cashBalance: -640,
+    tutors: 0,
+    pets: 0,
+    breeds: 0,
+    appointmentsToday: 0,
+    lowStock: 0,
+    cashBalance: 0,
   },
 }
 
 const navigationGroups = [
   {
     label: 'Principal',
-    items: [{ key: 'dashboard', label: 'VisÃ£o geral', icon: <DashboardRounded /> }],
+    items: [{ key: 'dashboard', label: 'Dashboard', icon: <DashboardRounded /> }],
   },
   {
     label: 'Cadastros',
     items: [
       { key: 'tutores', label: 'Tutores', icon: <PersonRounded /> },
       { key: 'pets', label: 'Pets', icon: <PetsRounded /> },
-      { key: 'racas', label: 'RaÃ§as', icon: <CategoryRounded /> },
+      { key: 'racas', label: 'Raças', icon: <CategoryRounded /> },
     ],
   },
   {
-    label: 'OperaÃ§Ã£o',
+    label: 'Operações',
     items: [
       { key: 'agenda', label: 'Agenda', icon: <CalendarMonthRounded /> },
-      { key: 'prontuario', label: 'ProntuÃ¡rio', icon: <MedicalInformationRounded /> },
+      { key: 'prontuario', label: 'Pronturio', icon: <MedicalInformationRounded /> },
       { key: 'financeiro', label: 'Financeiro', icon: <MonetizationOnRounded /> },
     ],
   },
@@ -345,12 +194,13 @@ const sections = navigationGroups.flatMap((group) => group.items)
 
 function App() {
   const [activeSection, setActiveSection] = useState<SectionKey>('dashboard')
-  const [data, setData] = useState<BootstrapPayload>(fallbackData)
+  const [data, setData] = useState<BootstrapPayload>(emptyData)
   const [search, setSearch] = useState('')
   const [authChecking, setAuthChecking] = useState(true)
+  const [isLoadingData, setIsLoadingData] = useState(true)
   const [authToken, setAuthToken] = useState<string | null>(null)
   const [authUser, setAuthUser] = useState<AuthUser | null>(null)
-  const [loginForm, setLoginForm] = useState({ email: 'teste@teste.com', password: 'teste', remember: true })
+  const [loginForm, setLoginForm] = useState({ email: '', password: '', remember: true })
 
   const [tutorDialogOpen, setTutorDialogOpen] = useState(false)
   const [breedDialogOpen, setBreedDialogOpen] = useState(false)
@@ -380,6 +230,29 @@ function App() {
     controlaValidade: false,
     ativo: true,
   })
+
+  const apiHeaders = () => ({
+    'Content-Type': 'application/json',
+    ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+  })
+
+  const loadBootstrap = async () => {
+    setIsLoadingData(true)
+
+    try {
+      const response = await fetch(`${apiUrl}/bootstrap`, { headers: apiHeaders() })
+      if (!response.ok) {
+        throw new Error('Falha ao carregar dados do servidor')
+      }
+
+      const payload = (await response.json()) as BootstrapPayload
+      setData(payload)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoadingData(false)
+    }
+  }
   const [newStockMovement, setNewStockMovement] = useState({
     produtoId: '',
     loteId: '',
@@ -391,11 +264,11 @@ function App() {
     documentoReferencia: '',
   })
   const [newAppointment, setNewAppointment] = useState({
-    date: '2026-05-01',
-    time: '15:30',
+    date: todayDateKey(),
+    time: '',
     tutorName: '',
     petName: '',
-    veterinarian: 'Dra. Marina Alves',
+    veterinarian: '',
     reason: '',
     status: 'aguardando' as AppointmentStatus,
   })
@@ -484,22 +357,27 @@ function App() {
       saveStoredSession(session, loginForm.remember)
       setAuthToken(session.token)
       setAuthUser(session.user)
-    } catch {
-      const session: StoredSession = {
-        token: 'demo-token',
-        user: { name: 'UsuÃ¡rio demo', email: loginForm.email },
-        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-      }
-      saveStoredSession(session, loginForm.remember)
-      setAuthToken(session.token)
-      setAuthUser(session.user)
+    } catch (error) {
+      console.error('Falha ao autenticar', error)
     }
   }
+
+  useEffect(() => {
+    if (!authChecking) {
+      if (authToken) {
+        loadBootstrap()
+      } else {
+        setIsLoadingData(false)
+      }
+    }
+  }, [authChecking, authToken])
 
   const handleLogout = () => {
     clearStoredSession()
     setAuthToken(null)
     setAuthUser(null)
+    setData(emptyData)
+    setIsLoadingData(true)
   }
 
   const handleNewTutor = () => {
@@ -507,11 +385,27 @@ function App() {
     setTutorDialogOpen(true)
   }
 
-  const handleSaveTutor = () => {
-    setData((current) => ({
-      ...current,
-      tutors: [...current.tutors, { ...newTutor, id: `t-${Date.now()}` }],
-    }))
+  const handleSaveTutor = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/tutors`, {
+        method: 'POST',
+        headers: apiHeaders(),
+        body: JSON.stringify(newTutor),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao salvar tutor')
+      }
+
+      const tutor = (await response.json()) as Tutor
+      setData((current) => ({
+        ...current,
+        tutors: [...current.tutors, tutor],
+      }))
+    } catch (error) {
+      console.error(error)
+    }
+
     setTutorDialogOpen(false)
   }
 
@@ -520,11 +414,27 @@ function App() {
     setBreedDialogOpen(true)
   }
 
-  const handleSaveBreed = () => {
-    setData((current) => ({
-      ...current,
-      breeds: [...current.breeds, { ...newBreed, id: `b-${Date.now()}` }],
-    }))
+  const handleSaveBreed = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/breeds`, {
+        method: 'POST',
+        headers: apiHeaders(),
+        body: JSON.stringify(newBreed),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao salvar raÃ§a')
+      }
+
+      const breed = (await response.json()) as Breed
+      setData((current) => ({
+        ...current,
+        breeds: [...current.breeds, breed],
+      }))
+    } catch (error) {
+      console.error(error)
+    }
+
     setBreedDialogOpen(false)
   }
 
@@ -533,18 +443,30 @@ function App() {
     setPetDialogOpen(true)
   }
 
-  const handleSavePet = () => {
-    setData((current) => ({
-      ...current,
-      pets: [
-        ...current.pets,
-        {
+  const handleSavePet = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/pets`, {
+        method: 'POST',
+        headers: apiHeaders(),
+        body: JSON.stringify({
           ...newPet,
-          id: `p-${Date.now()}`,
           alerts: newPet.alerts.split(',').map((alert) => alert.trim()).filter(Boolean),
-        },
-      ],
-    }))
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao salvar pet')
+      }
+
+      const pet = (await response.json()) as Pet
+      setData((current) => ({
+        ...current,
+        pets: [...current.pets, pet],
+      }))
+    } catch (error) {
+      console.error(error)
+    }
+
     setPetDialogOpen(false)
   }
 
@@ -576,18 +498,34 @@ function App() {
     setProductDialogOpen(true)
   }
 
-  const handleSaveProduct = () => {
-    setData((current) => {
-      const updatedProducts = editingProductId
-        ? current.products.map((product) => (product.id === editingProductId ? { ...newProduct, id: editingProductId } : product))
-        : [...current.products, { ...newProduct, id: `prod-${Date.now()}` }]
-      const createdProduct = updatedProducts[updatedProducts.length - 1]
-      const shouldCreateStock = !editingProductId && createdProduct.controlaEstoque
-
-      return {
+  const handleSaveProduct = async () => {
+    if (editingProductId) {
+      setData((current) => ({
         ...current,
-        products: updatedProducts,
-        estoquesProduto: shouldCreateStock
+        products: current.products.map((product) =>
+          product.id === editingProductId ? { ...newProduct, id: editingProductId } : product,
+        ),
+      }))
+      setProductDialogOpen(false)
+      return
+    }
+
+    try {
+      const response = await fetch(`${apiUrl}/products`, {
+        method: 'POST',
+        headers: apiHeaders(),
+        body: JSON.stringify(newProduct),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao salvar produto')
+      }
+
+      const createdProduct = (await response.json()) as Product
+      setData((current) => ({
+        ...current,
+        products: [...current.products, createdProduct],
+        estoquesProduto: createdProduct.controlaEstoque
           ? [
               ...current.estoquesProduto,
               {
@@ -595,12 +533,15 @@ function App() {
                 produtoId: createdProduct.id,
                 quantidadeAtual: 0,
                 quantidadeReservada: 0,
-                updatedAt: new Date().toISOString(),
+                updatedAt: createdProduct.updatedAt || new Date().toISOString(),
               },
             ]
           : current.estoquesProduto,
-      }
-    })
+      }))
+    } catch (error) {
+      console.error(error)
+    }
+
     setProductDialogOpen(false)
   }
 
@@ -641,58 +582,68 @@ function App() {
     if (saldoPosterior < 0) {
       return
     }
-    const movement: StockMovement = {
-      id: `mov-${Date.now()}`,
-      produtoId: newStockMovement.produtoId,
-      loteId: newStockMovement.loteId || undefined,
-      tipoMovimentacao: newStockMovement.tipoMovimentacao,
-      origem: newStockMovement.origem,
-      quantidade: Number(newStockMovement.quantidade),
-      saldoAnterior,
-      saldoPosterior,
-      custoUnitario: Number(newStockMovement.custoUnitario),
-      valorTotal: Number(newStockMovement.quantidade) * Number(newStockMovement.custoUnitario),
-      observacao: newStockMovement.observacao,
-      documentoReferencia: newStockMovement.documentoReferencia,
-      createdAt: new Date().toISOString(),
+
+    try {
+      const response = await fetch(`${apiUrl}/stock-movements`, {
+        method: 'POST',
+        headers: apiHeaders(),
+        body: JSON.stringify({
+          produtoId: newStockMovement.produtoId,
+          loteId: newStockMovement.loteId || undefined,
+          tipoMovimentacao: newStockMovement.tipoMovimentacao,
+          origem: newStockMovement.origem,
+          quantidade: Number(newStockMovement.quantidade),
+          saldoAnterior,
+          saldoPosterior,
+          custoUnitario: Number(newStockMovement.custoUnitario),
+          observacao: newStockMovement.observacao,
+          documentoReferencia: newStockMovement.documentoReferencia,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao salvar movimentação de estoque')
+      }
+
+      const movement = (await response.json()) as StockMovement
+      setData((current) => ({
+        ...current,
+        estoquesProduto: upsertProductStock(current.estoquesProduto, movement.produtoId, movement.saldoPosterior),
+        movimentacoesEstoque: [movement, ...current.movimentacoesEstoque],
+      }))
+    } catch (error) {
+      console.error(error)
     }
 
-    setData((current) => ({
-      ...current,
-      estoquesProduto: upsertProductStock(current.estoquesProduto, movement.produtoId, movement.saldoPosterior),
-      movimentacoesEstoque: [movement, ...current.movimentacoesEstoque],
-    }))
     setStockMovementDialogOpen(false)
-
-    await fetch(`${apiUrl}/stock-movements`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(authToken && authToken !== 'demo-token' ? { Authorization: `Bearer ${authToken}` } : {}),
-      },
-      body: JSON.stringify({
-        produtoId: movement.produtoId,
-        loteId: movement.loteId,
-        tipoMovimentacao: movement.tipoMovimentacao,
-        origem: movement.origem,
-        quantidade: movement.quantidade,
-        custoUnitario: movement.custoUnitario,
-        observacao: movement.observacao,
-        documentoReferencia: movement.documentoReferencia,
-      }),
-    }).catch(() => undefined)
   }
 
   const handleNewAppointment = () => {
-    setNewAppointment({ date: '2026-05-01', time: '15:30', tutorName: '', petName: '', veterinarian: 'Dra. Marina Alves', reason: '', status: 'aguardando' })
+    setNewAppointment({ date: todayDateKey(), time: '', tutorName: '', petName: '', veterinarian: '', reason: '', status: 'aguardando' })
     setAppointmentDialogOpen(true)
   }
 
-  const handleSaveAppointment = () => {
-    setData((current) => ({
-      ...current,
-      appointments: [...current.appointments, { ...newAppointment, id: `a-${Date.now()}` }],
-    }))
+  const handleSaveAppointment = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/appointments`, {
+        method: 'POST',
+        headers: apiHeaders(),
+        body: JSON.stringify(newAppointment),
+      })
+
+      if (!response.ok) {
+        throw new Error('Falha ao salvar compromisso')
+      }
+
+      const appointment = await response.json()
+      setData((current) => ({
+        ...current,
+        appointments: [...current.appointments, appointment],
+      }))
+    } catch (error) {
+      console.error(error)
+    }
+
     setAppointmentDialogOpen(false)
   }
 
@@ -773,7 +724,7 @@ function App() {
     })
   }
 
-  if (authChecking) {
+  if (authChecking || (authToken && isLoadingData)) {
     return (
       <Box sx={{ minHeight: '100vh', display: 'grid', placeItems: 'center' }}>
         <CircularProgress />

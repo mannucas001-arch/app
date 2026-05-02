@@ -28,7 +28,7 @@ export function StockMovementsPage({ products, movements, onNewStockMovement }: 
           <Typography variant="overline" color="text.secondary" sx={{ fontWeight: 800 }}>
             Estoque / Historico
           </Typography>
-          <Typography variant="h4">Movimentacoes de estoque</Typography>
+          <Typography variant="h4">Movimentações de estoque</Typography>
           <Typography color="text.secondary" sx={{ mt: 0.5, maxWidth: 720 }}>
             Livro de movimentos que explica cada alteracao no saldo dos produtos.
           </Typography>

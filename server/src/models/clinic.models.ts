@@ -2,6 +2,7 @@ import { Schema, model, models } from 'mongoose';
 import type {
   Appointment,
   Breed,
+  EstoqueLote,
   FinancialEntry,
   EstoqueProduto,
   MedicalRecord,
@@ -9,6 +10,8 @@ import type {
   Pet,
   Product,
   Session,
+  StockEntry,
+  StockEntryItem,
   StockItem,
   Tutor,
   User,
@@ -182,12 +185,15 @@ const stockMovementSchema = new Schema<MovimentacaoEstoque>(
       type: String,
       enum: [
         'COMPRA',
+        'DEVOLUCAO_CLIENTE',
+        'BONIFICACAO',
         'VENDA',
         'ATENDIMENTO',
         'VACINACAO',
         'PROCEDIMENTO',
         'INVENTARIO',
         'AJUSTE_MANUAL',
+        'AJUSTE_POSITIVO',
         'CANCELAMENTO',
         'DEVOLUCAO',
         'TRANSFERENCIA',
@@ -222,6 +228,49 @@ const productStockSchema = new Schema<EstoqueProduto>(
   },
 );
 
+const estoqueLoteSchema = new Schema<EstoqueLote>(
+  {
+    id: { type: String, required: true, unique: true },
+    produtoId: { type: String, required: true, index: true },
+    numeroLote: { type: String, required: true, trim: true },
+    dataValidade: { type: Date, required: true, index: true },
+    quantidadeAtual: { type: Number, required: true, min: 0, default: 0 },
+    custoUnitario: { type: Number, required: true, min: 0, default: 0 },
+    ativo: { type: Boolean, required: true, default: true },
+  },
+  baseOptions,
+);
+
+const stockEntryItemSchema = new Schema<StockEntryItem>(
+  {
+    id: { type: String, required: true },
+    produtoId: { type: String, required: true, index: true },
+    quantidade: { type: Number, required: true, min: 0 },
+    valorUnitario: { type: Number, required: true, min: 0 },
+    lote: { type: String, trim: true },
+    validade: { type: Date },
+  },
+  { _id: false, versionKey: false },
+);
+
+const stockEntrySchema = new Schema<StockEntry>(
+  {
+    id: { type: String, required: true, unique: true },
+    fornecedor: { type: String, trim: true },
+    data: { type: String, required: true },
+    tipo: {
+      type: String,
+      enum: ['COMPRA', 'DEVOLUCAO_CLIENTE', 'BONIFICACAO', 'AJUSTE_POSITIVO', 'TRANSFERENCIA'],
+      required: true,
+    },
+    documento: { type: String, trim: true },
+    observacao: { type: String, trim: true },
+    itens: { type: [stockEntryItemSchema], required: true, default: [] },
+    confirmado: { type: Boolean, required: true, default: false },
+  },
+  baseOptions,
+);
+
 export const UserModel = models.User || model<User>('User', userSchema);
 export const SessionModel = models.Session || model<Session>('Session', sessionSchema);
 export const BreedModel = models.Breed || model<Breed>('Breed', breedSchema);
@@ -238,3 +287,6 @@ export const StockMovementModel =
   models.MovimentacaoEstoque || model<MovimentacaoEstoque>('MovimentacaoEstoque', stockMovementSchema);
 export const ProductStockModel =
   models.EstoqueProduto || model<EstoqueProduto>('EstoqueProduto', productStockSchema);
+export const EstoqueLoteModel =
+  models.EstoqueLote || model<EstoqueLote>('EstoqueLote', estoqueLoteSchema);
+export const StockEntryModel = models.StockEntry || model<StockEntry>('StockEntry', stockEntrySchema);

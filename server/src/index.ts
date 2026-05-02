@@ -1,23 +1,22 @@
 import { createApp } from './app';
 import { connectToDatabase } from './config/database';
 import { env } from './config/env';
-import { MemoryAuthRepository, MongoAuthRepository } from './repositories/auth.repository';
-import { MemoryClinicRepository, MongoClinicRepository } from './repositories/clinic.repository';
-import { PasswordHasher } from './services/password-hasher';
+import { MongoAuthRepository } from './repositories/auth.repository';
+import { MongoClinicRepository } from './repositories/clinic.repository';
 
 async function startServer() {
   const databaseConnected = await connectToDatabase();
-  const clinicRepository = databaseConnected ? new MongoClinicRepository() : new MemoryClinicRepository();
-  const authRepository = databaseConnected
-    ? new MongoAuthRepository()
-    : new MemoryAuthRepository(new PasswordHasher().hash('teste'));
-
-  if (clinicRepository instanceof MongoClinicRepository) {
-    await clinicRepository.seedIfEmpty();
+  
+  if (!databaseConnected) {
+    throw new Error('Falha ao conectar ao MongoDB. Verifique MONGODB_URI no .env');
   }
 
+  const clinicRepository = new MongoClinicRepository();
+  const authRepository = new MongoAuthRepository();
+
   const { app, authService } = createApp(clinicRepository, authRepository);
-  await authService.seedDefaultAdmin();
+  await authService.ensureDefaultUser();
+  await clinicRepository.ensureDefaultBreeds();
 
   app.listen(env.port, () => {
     console.log(`Server is running on port ${env.port}`);

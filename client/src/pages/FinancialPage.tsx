@@ -1,4 +1,4 @@
-import { Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Paper, Stack, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import type { FinancialEntry } from '../types'
 import { MoneyCard } from '../components/FinanceWidgets'
 import { StatusChip } from '../components/StatusChip'
